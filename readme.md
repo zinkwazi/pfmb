@@ -2,10 +2,10 @@
 ## by Greg Lawler
 ## v1.0 7/1/2014
 
-pfmb.sh will connect to one or more remote pfSense installs and backup the configuratin xml file.
+pfmb.sh will connect to one or more remote pfSense installs and backup the configuration XML file.
 The resulting backup will enable you to roll back to a previous configuration or replace failed hardware.
 
-The script only works over SSH with SSH keys for secure authentication.
+The script works over SSH with SSH public keys for secure authentication and transport.
 
 ## Hosts config file ##
 Each line of the config file should contain the hostname or IP of a pfSense router/firewall. 
