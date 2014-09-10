@@ -2,8 +2,8 @@
 ## by Greg Lawler
 ## v1.0 7/1/2014
 
-This script will connect to one or more remote pfSense installs and backup the configuratin xml file.
-With this file, you can restore an old config or easily replace failed hardware.
+pfmb.sh will connect to one or more remote pfSense installs and backup the configuratin xml file.
+The resulting backup will enable you to roll back to a previous configuration or replace failed hardware.
 
 The script only works over SSH with SSH keys for secure authentication.
 
@@ -23,7 +23,7 @@ Nonetheless, here is the quick version:
 	- Copy the content from id_rsa.pub and paste it into the "Authorized keys" field in pfSense (see below.)
 
 ## SSH Setup on the pfSense box ##
-Enable SSH:
+###Enable SSH:
 	- Log into your pfSense via the web interface.
 	- Advanced -> Secure Shell Server -> Check the "Enable Secure Shell" box.
 	- Note the port, if this is not the default, you will need to specify it in the hosts config.
@@ -34,7 +34,7 @@ Add a backup user and SSH key:
 	- Click the + to add new user.
 	- Enter username and a secure password (you don't need to remember the password but it is required by the form.)
 	- Full Name -> Enter "Backup User"
-	- Click on "admins" under "Not Member Of" and move it to the "Memmber of" box to make your backup user an admin.
+	- Click on "admins" under "Not Member Of" and move it to the "Member of" box to make your backup user an admin.
 	- Authorized keys -> Check this box and paste in your SSH public key from above.
 	- Save your changes.
 
