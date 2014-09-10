@@ -1,4 +1,4 @@
-## pfmb - Multi site backup tool for pfSense
+## pfSense Multi site backup tool - pfmb.sh
 ## by Greg Lawler
 ## v1.0 7/1/2014
 
