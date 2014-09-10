@@ -1,6 +1,6 @@
-# pfmb - Multi site backup tool for pfSense
-# by Greg Lawler
-# v1.0 7/1/2014
+## pfmb - Multi site backup tool for pfSense
+## by Greg Lawler
+## v1.0 7/1/2014
 
 This script will connect to one or more remote pfSense installs and backup the configuratin file.
 
