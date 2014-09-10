@@ -1,6 +1,6 @@
-# pfSense-mb Multi Backup tool pfmb.sh
-# by Greg Lawler greg@outsideopen.com
-# 7/1/2014
+# pfmb - Multi site backup tool for pfSense
+# by Greg Lawler
+# v1.0 7/1/2014
 
 This script will connect to one or more remote pfSense installs and backup the configuratin file.
 
@@ -42,11 +42,6 @@ If you can SSH into each pfSense box as the backup user without having to enter 
 
 ## The backups ##
 Backups are created with the host name (from the config file) followed by a timestamp.
-Example backup results:
-office.example.com-2014-07-04-1404457535.xml
-office.example.com-2014-07-04-1404457646.xml
-192.168.5.1-2014-07-04-1404457614.xml
-192.168.5.1-2014-07-04-1404457646.xml
 
 
 Enjoy :)
