@@ -11,14 +11,14 @@ The script only works over SSH with SSH keys for secure authentication.
 Each line of the config file should contain the hostname or IP of a pfSense router/firewall. 
 Optionally follow the hostname with colon port numnber if SSH is not on the default TCP port 22.
 
-Example hosts config file with three entries - note port 443 used on third entry:
+###Example hosts config file with three entries - note port 443 used on third entry:
 192.168.5.1
 office.example.com
 207.76.123.123:443
 
 ## SSH setup on your side ##
 If SSH keys are new to you, there are lots of good resources just a Google away ;)
-Nonetheless, here is the quick version:
+###Nonetheless, here is the quick version:
 	- Run ssh-keygen from the command line on the [Mac / Linux] box doing the backups.
 	- Copy the content from id_rsa.pub and paste it into the "Authorized keys" field in pfSense (see below.)
 
@@ -28,7 +28,7 @@ Nonetheless, here is the quick version:
 	- Advanced -> Secure Shell Server -> Check the "Enable Secure Shell" box.
 	- Note the port, if this is not the default, you will need to specify it in the hosts config.
 	- Save your changes.
-Add a backup user and SSH key:
+###Add a backup user and SSH key:
 	- Log into your pfSense via the web interface.
 	- System -> User Manager
 	- Click the + to add new user.
