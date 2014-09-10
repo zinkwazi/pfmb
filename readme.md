@@ -2,7 +2,8 @@
 ## by Greg Lawler
 ## v1.0 7/1/2014
 
-This script will connect to one or more remote pfSense installs and backup the configuratin file.
+This script will connect to one or more remote pfSense installs and backup the configuratin xml file.
+With this file, you can restore an old config or easily replace failed hardware.
 
 The script only works over SSH with SSH keys for secure authentication.
 
