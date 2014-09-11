@@ -2,7 +2,7 @@
 ## by Greg Lawler
 ## v1.0 7/1/2014
 
-pfmb.sh will connect to one or more remote pfSense installs and backup the configuration XML file.
+pfmb will connect to one or more remote pfSense installs and backup the configuration XML file.
 The resulting backup will enable you to roll back to a previous configuration or replace failed hardware.
 pfmb will keep the number of backups that you specify in config, rotating out the old ones.
 
