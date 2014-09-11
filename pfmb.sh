@@ -12,8 +12,8 @@
 # Hosts config file
 config=hosts.conf
 
-# SSH backup user
-backupuser=glawler
+# SSH backup username
+backupuser=backup
 
 # Backup directory - relative to . or use full path.
 backupdir=backups
