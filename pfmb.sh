@@ -9,13 +9,13 @@
 # Allow different SSH keys for each IP.
 
 ##### Configuration #####
-# Hosts config file
+# Hosts config file. Enter full path if using crontab. 
 config=hosts.conf
 
 # SSH backup username
 backupuser=backup
 
-# Backup directory - relative to . or use full path.
+# Backup directory. Enter full path if using crontab.
 backupdir=backups
 
 # Number of backups to keep.
@@ -53,11 +53,11 @@ function main() {
 	while IFS=':' read -r host port ; do
 		if [ -n "$port" ] ; then
 			isint $port
-			scp -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml" #> /dev/null 2>&1
+			scp -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml" > /dev/null 2>&1
 			echo "Backing up $host..."
 			rotateBackups $host
 		else
-			scp $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml" #> /dev/null 2>&1
+			scp $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml" > /dev/null 2>&1
 			echo "Backing up $host..."
 			rotateBackups $host
 		fi
