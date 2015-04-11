@@ -1,0 +1,58 @@
+#!/bin/bash
+# by Greg Lawler greg@outsideopen.com
+# v1.0 7/1/2014
+#
+# To Do List:
+# Encrypt the stored backups.
+# Accept single hostname or IP from the command line and bypass hosts file.
+# Give useful feedback on errors relating to SSH / connectivity.
+# Allow different SSH keys for each IP.
+
+source /etc/default/pfmb
+
+##### Other settings - don't change these willy-nilly unless you know what you're doing! #####
+datestamp=$(date '+%Y-%m-%d-%s')
+
+# Path on pfSense to the XML configuration file.
+xmlpath="/cf/conf/config.xml"
+
+function isint() {
+  re='^[0-9]+$'
+  if ! [[ $1 =~ $re ]] ; then
+    echo "Error: $1 is not a valid port number.  Check your $config syntax..." >&2; exit 1
+  fi
+}
+
+function rotateBackups() {
+  files=$(ls $backupdir/*$1-*xml | sort | tail -n $backupcopies)
+  for i in $backupdir/*$1-*xml; do
+    keep=0;
+    for a in ${files[@]}; do
+      if [ $i == $a ]; then
+        keep=1;
+      fi
+    done;
+    if [ $keep == 0 ]; then
+      rm $i
+    fi
+  done
+}
+
+function main() {
+  while IFS=':' read -r host port ; do
+    if [ -n "$port" ] ; then
+      isint $port
+    else
+      port=22
+    fi
+    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml"
+    if [ $? -eq 0 ] && [ -f "$backupdir/$host-$datestamp.xml" ]; then
+      echo "Backing up $host..."
+    else
+      echo "Backup on $host unsuccessfull"
+      exit 1
+    fi
+    rotateBackups $host
+  done < $config
+}
+main
