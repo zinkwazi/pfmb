@@ -46,7 +46,7 @@ function main() {
       port=22
     fi
     scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml"
-    if [ $? -eq 0 ] && [ -f "$backupdir/$host-$datestamp.xml" ]; then
+    if [ $? -eq 0 ] && [ -s "$backupdir/$host-$datestamp.xml" ]; then
       echo "Backing up $host..."
     else
       echo "Backup on $host unsuccessfull"
