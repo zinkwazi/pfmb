@@ -48,7 +48,7 @@ function main() {
     scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml"
     if [ $? -eq 0 ] && [ -s "$backupdir/$host-$datestamp.xml" ]; then
       echo "Backing up $host..."
-    rotateBackups $host
+      rotateBackups $host
     else
       echo "Backup on $host unsuccessfull"
     fi
