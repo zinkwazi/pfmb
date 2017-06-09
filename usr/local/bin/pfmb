@@ -45,7 +45,7 @@ function main() {
       echo "Backing up $desc..."
     rotateBackups $desc-$host
     else
-      echo "Backup on $desc unsuccessfull"
+      echo "Backup on $desc unsuccessful"
     fi
   done < $config
 }
