@@ -39,18 +39,18 @@ function rotateBackups() {
 }
 
 function main() {
-  while IFS=':' read -r host port ; do
+  while IFS=':' read -r host port desc ; do
     if [ -n "$port" ] ; then
       isint $port
     else
       port=22
     fi
-    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml"
-    if [ $? -eq 0 ] && [ -s "$backupdir/$host-$datestamp.xml" ]; then
-      echo "Backing up $host..."
-    rotateBackups $host
+    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$desc-$host-$datestamp.xml"
+    if [ $? -eq 0 ] && [ -s "$backupdir/$desc-$host-$datestamp.xml" ]; then
+      echo "Backing up $desc..."
+    rotateBackups $desc
     else
-      echo "Backup on $host unsuccessfull"
+      echo "Backup on $desc unsuccessfull"
     fi
   done < $config
 }
