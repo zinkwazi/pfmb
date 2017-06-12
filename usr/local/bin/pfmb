@@ -8,13 +8,21 @@
 # Give useful feedback on errors relating to SSH / connectivity.
 # Allow different SSH keys for each IP.
 
-source /etc/default/pfmb
+if [[ -r "/etc/default/pfmb" ]] ; then
+  source /etc/default/pfmb
+fi
+
+##### Defaults when there are no defaults
+: ${config:=/etc/pfmb/hosts.conf}
+: ${backupuser:=backup}
+: ${backupdir:=/var/backups/pfmb}
+: ${backupcopies:=25}
 
 ##### Other settings - don't change these willy-nilly unless you know what you're doing! #####
 datestamp=$(date '+%Y-%m-%d-%s')
 
 # Path on pfSense to the XML configuration file.
-xmlpath="/cf/conf/config.xml"
+: ${xmlpath:=/cf/conf/config.xml}
 
 function isint() {
   re='^[0-9]+$'
@@ -24,33 +32,47 @@ function isint() {
 }
 
 function rotateBackups() {
-  files=$(ls $backupdir/*$1-*xml | sort | tail -n $backupcopies)
-  for i in $backupdir/*$1-*xml; do
-    keep=0;
+  OLDIFS=$IFS
+  IFS=$'\n'
+  files=$(find "$backupdir" -name "$1-*xml" | sort | tail -n $backupcopies)
+  find "$backupdir" -name "$1-*xml" | while read i; do
+    keep=0
     for a in ${files[@]}; do
-      if [ $i == $a ]; then
+      echo $a
+      if [ "$i" == "$a" ]; then
         keep=1;
       fi
-    done;
+    done
     if [ $keep == 0 ]; then
-      rm $i
+      rm "$i"
     fi
   done
+  IFS=$OLDIFS
 }
 
 function main() {
-  while IFS=':' read -r host port ; do
+  while IFS=':' read -r host port desc; do
     if [ -n "$port" ] ; then
       isint $port
     else
       port=22
     fi
-    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml"
-    if [ $? -eq 0 ] && [ -s "$backupdir/$host-$datestamp.xml" ]; then
-      echo "Backing up $host..."
-      rotateBackups $host
+
+    # setup vars for use
+    name="$host"
+    if [[ ! -z "$desc" ]] ; then
+        name="$desc"
+        desc="$desc-"
+    fi
+    backup_file="$backupdir/$desc$host-$datestamp.xml"
+
+    # run the backups
+    scp -q -P $port $backupuser@$host:$xmlpath "${backup_file}"
+    if [ $? -eq 0 ] && [ -s "${backup_file}" ]; then
+      echo "Backing up $name... OK"
+      rotateBackups "$desc$host"
     else
-      echo "Backup on $host unsuccessfull"
+      echo "Backing up $name... FAILED"
     fi
   done < $config
 }
