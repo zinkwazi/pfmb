@@ -22,29 +22,36 @@ Format of the hosts.conf entries `<hostname>:<port>:<description>`
 
 ## SSH setup on your side ##
 If SSH keys are new to you, there are lots of good resources just a Google away ;)
+
 ##### Nonetheless, here is the quick version:
-	- Run ssh-keygen from the command line on the [Mac / Linux] box doing the backups.
-	- Copy the content from id_rsa.pub and paste it into the "Authorized keys" field in pfSense (see below.)
+- Run ssh-keygen from the command line on the [Mac / Linux] box doing the backups.
+- Copy the content from id_rsa.pub and paste it into the "Authorized keys" field in pfSense (see below.)
+
 ##### Setup your ~/.ssh/config file to pass the correct identity for your backup user:
-    Host *
+```
+Host *
     User backup
     IdentityFile ~/.ssh/backup-user.rsa
+```
 
 ## SSH Setup on the pfSense box ##
+
 ##### Enable SSH:
-	- Log into your pfSense via the web interface.
-	- Advanced -> Secure Shell Server -> Check the "Enable Secure Shell" box.
-	- Note the port, if this is not the default, you will need to specify it in the hosts config.
-	- Save your changes.
+- Log into your pfSense via the web interface.
+- Advanced -> Secure Shell Server -> Check the "Enable Secure Shell" box.
+- Note the port, if this is not the default, you will need to specify it in the hosts config.
+- Save your changes.
+
 ##### Add a backup user and SSH key:
-	- Log into your pfSense via the web interface.
-	- System -> User Manager
-	- Click the + to add new user.
-	- Enter username and a secure password (you don't need to remember the password but it is required by the form.)
-	- Full Name -> Enter "Backup User"
-	- Click on "admins" under "Not Member Of" and move it to the "Member of" box to make your backup user an admin.
-	- Authorized keys -> Check this box and paste in your SSH public key from above.
-	- Save your changes.
+
+- Log into your pfSense via the web interface.
+- System -> User Manager
+- Click the + to add new user.
+- Enter username and a secure password (you don't need to remember the password but it is required by the form.)
+- Full Name -> Enter "Backup User"
+- Click on "admins" under "Not Member Of" and move it to the "Member of" box to make your backup user an admin.
+- Authorized keys -> Check this box and paste in your SSH public key from above.
+- Save your changes.
 
 ## Testing your setup ##
 If you can SSH into each pfSense box as the backup user without having to enter a password then you are ready to run the script.
