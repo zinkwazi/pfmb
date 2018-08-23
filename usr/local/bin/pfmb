@@ -24,8 +24,8 @@ function isint() {
 }
 
 function rotateBackups() {
-  files=$(ls $backupdir/*$1-*xml | sort | tail -n $backupcopies)
-  for i in $backupdir/*$1-*xml; do
+  files=$(ls $backupdir/$host/*$1-*xml | sort | tail -n $backupcopies)
+  for i in $backupdir/$host/*$1-*xml; do
     keep=0;
     for a in ${files[@]}; do
       if [ $i == $a ]; then
@@ -38,6 +38,27 @@ function rotateBackups() {
   done
 }
 
+function create_folder() {
+
+        #Récupération du dernier numéro de ligne du fichier
+        last_line_number=$(cat $config | wc -l)
+        i=1
+
+        #début de la boucle
+        while (($i <= $last_line_number))
+                do
+
+                #Récupération du nom du client dans le fichier host, suppression du :port_number pour avoir un nommage propre
+                client=$(sed -n "$i p" $config | cut -d: -f1)
+
+                #Création du répertoire client si il n'existe déja pas
+                mkdir -p $backupdir/$client
+
+                #Incrémentation
+                ((i+=1))
+        done
+}
+
 function main() {
   while IFS=':' read -r host port ; do
     if [ -n "$port" ] ; then
@@ -45,8 +66,8 @@ function main() {
     else
       port=22
     fi
-    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host-$datestamp.xml"
-    if [ $? -eq 0 ] && [ -s "$backupdir/$host-$datestamp.xml" ]; then
+    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host/$host-$datestamp.xml"
+    if [ $? -eq 0 ] && [ -s "$backupdir/$host/$host-$datestamp.xml" ]; then
       echo "Backing up $host..."
       rotateBackups $host
     else
@@ -54,4 +75,5 @@ function main() {
     fi
   done < $config
 }
+create_folder
 main
