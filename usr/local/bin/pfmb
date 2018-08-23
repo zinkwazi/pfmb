@@ -37,24 +37,26 @@ function rotateBackups() {
     fi
   done
 }
-
+#############
+## MY ADDED
+#############
 function create_folder() {
 
-        #Récupération du dernier numéro de ligne du fichier
+        #We get the last line number from the file
         last_line_number=$(cat $config | wc -l)
         i=1
 
-        #début de la boucle
+        #Loop start
         while (($i <= $last_line_number))
                 do
 
-                #Récupération du nom du client dans le fichier host, suppression du :port_number pour avoir un nommage propre
+                #Get the client name from the host file, Removed :port_number to get clean name when creating the directory
                 client=$(sed -n "$i p" $config | cut -d: -f1)
 
-                #Création du répertoire client si il n'existe déja pas
+                #Creation of the customer directory if it does not already exist
                 mkdir -p $backupdir/$client
 
-                #Incrémentation
+                #Incrementation
                 ((i+=1))
         done
 }
