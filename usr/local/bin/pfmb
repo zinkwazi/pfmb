@@ -1,6 +1,5 @@
 #!/bin/bash
 # by Greg Lawler greg@outsideopen.com
-# v1.0 7/1/2014
 #
 # To Do List:
 # Encrypt the stored backups.
@@ -62,13 +61,10 @@ function create_folder() {
 }
 
 function main() {
-  while IFS=' ' read -r host port desc ; do
-    scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$desc-$host-$datestamp.xml"
-    if [ $? -eq 0 ] && [ -s "$backupdir/$desc-$host-$datestamp.xml" ]; then
-      echo "Backing up $desc..."
-    rotateBackups $desc-$host
+  while IFS=':' read -r host port ; do
+    if [ -n "$port" ] ; then
+      isint $port
     else
-<<<<<<< HEAD
       port=22
     fi
     scp -q -P $port $backupuser@$host:$xmlpath "$backupdir/$host/$host-$datestamp.xml"
@@ -77,9 +73,6 @@ function main() {
       rotateBackups $host
     else
       echo "Backup on $host unsuccessfull"
-=======
-      echo "Backup on $desc unsuccessful"
->>>>>>> master
     fi
   done < $config
 }
