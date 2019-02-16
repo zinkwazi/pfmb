@@ -75,6 +75,7 @@ function main() {
       rotateBackups
     else
       echo "Backing up $name... FAILED"
+      /etc/pfmb/pushover.sh -t "pfSense Back-up Error" "$name pfsense config backup has failed."
     fi
   done < $config
 }
