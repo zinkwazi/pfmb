@@ -60,6 +60,11 @@ If you can SSH into each pfSense box as the backup user without having to enter 
 ## The backups ##
 Backups are created from the description and host name (from the config file) followed by a timestamp.
 
+## Pushover Alerts ##
+Create a new Application/Plugin on [Pushover](https://pushover.net/apps/build)
+
+Edit /etc/pfmb/pushover.sh and add your newly created Pushover Token and User Keys into the TOKEN and USER sections at the top.
+
 Enjoy :)
 
 Greg Lawler
