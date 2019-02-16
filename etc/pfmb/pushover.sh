@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#Source https://github.com/jnwatts/pushover.sh
 # Default config vars
 CURL="$(which curl)"
 PUSHOVER_URL="https://api.pushover.net/1/messages.json"
