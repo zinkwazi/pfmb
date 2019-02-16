@@ -65,6 +65,10 @@ Create a new Application/Plugin on [Pushover](https://pushover.net/apps/build)
 
 Edit /etc/pfmb/pushover.sh and add your newly created Pushover Token and User Keys into the TOKEN and USER sections at the top.
 
+If you don't wish to use Pushover alerting simply remove the following line in /usr/local/bin/pfmb:
+
+> /etc/pfmb/pushover.sh -t "pfSense Back-up Error" "$name pfsense config backup has failed."
+
 Enjoy :)
 
 Greg Lawler
