@@ -57,19 +57,23 @@ function main() {
     fi
 
     # setup vars for use
-    name="$host"
-    if [[ ! -z "$desc" ]] ; then
-        name="$desc"
-    fi
+    name=${desc:-$host}
     backup_file="$backupdir/$name/$name-$host-$datestamp.xml"
 
     # create dir if doesn't exist
     if ! [[ -d "$backupdir/$name" && ! -L "$backupdir/$name" ]] ; then
-	mkdir -p $backupdir/$name
+      mkdir -p $backupdir/$name
     fi
 
     #run the backups
-    scp -q -P $port $backupuser@$host:$xmlpath "${backup_file}"
+    case $host in
+      *@*)
+        ;;
+      *)
+        host="$backupuser@$host"
+        ;;
+    esac
+    scp -q -P $port $host:$xmlpath "${backup_file}"
     if [ $? -eq 0 ] && [ -s "${backup_file}" ]; then
       echo "Backing up $name... OK"
       rotateBackups
