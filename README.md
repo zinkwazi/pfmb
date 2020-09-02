@@ -12,7 +12,7 @@ The script works over SSH with SSH public keys for secure authentication and tra
 Each line of the config file should contain the hostname or IP of a pfSense router/firewall. 
 Optionally follow the hostname with colon port numnber if SSH is not on the default TCP port 22.
 
-Format of the hosts.conf entries `<hostname>:<port>:<description>`
+Format of the hosts.conf entries `<username>@<hostname>:<port>:<description>`
 
 ##### Example hosts.conf file with 3 entries. Note the first entry with non-standard SSH port:
     10.10.1.1:80
@@ -20,6 +20,7 @@ Format of the hosts.conf entries `<hostname>:<port>:<description>`
     pfsense.example.com
     207.123.123.4
     10.20.1.1::pfsense
+    user@pfsense2.example.com
 
 ## SSH setup on your side ##
 If SSH keys are new to you, there are lots of good resources just a Google away ;)
