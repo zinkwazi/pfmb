@@ -15,12 +15,14 @@ Optionally follow the hostname with colon port numnber if SSH is not on the defa
 Format of the hosts.conf entries `<username>@<hostname>:<port>:<description>`
 
 ##### Example hosts.conf file with 3 entries. Note the first entry with non-standard SSH port:
+```
 10.10.1.1:80
 10.11.1.1:8100:pfsense2
 pfsense.example.com
 207.123.123.4
 10.20.1.1::pfsense
 user@pfsense2.example.com
+```
 
 ## SSH setup on your side ##
 If SSH keys are new to you, there are lots of good resources just a Google away ;)
