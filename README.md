@@ -1,7 +1,8 @@
 ## pfSense Multi site backup tool - pfmb.sh
-### by Greg Lawler
-### v1.5 10/26/2020 (Current)
+by Greg Lawler
+v1.5 10/26/2020
 
+## About pfmb
 pfmb will connect to one or many remote pfSense installs and backup the configuration XML file.
 The resulting backup will enable you to easily go back to a previous configuration or replace failed hardware.
 pfmb will keep the number of backups that you specify in config, rotating out the old ones.
