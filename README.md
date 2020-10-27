@@ -26,6 +26,7 @@ user@pfsense2.example.com
 
 ## Scheduled backups ##
 Add the following to the crontab for your backup user to run the script regularly.
+
 ```0 6,12 * * * pfmb | logger -t pfsense_backup```
 
 ## SSH setup on your side ##
