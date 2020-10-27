@@ -24,6 +24,10 @@ pfsense.example.com
 user@pfsense2.example.com
 ```
 
+## Scheduled backups ##
+Add the following to the crontab for your backup user to run the script regularly.
+0 6,12 * * * pfmb | logger -t pfsense_backup
+
 ## SSH setup on your side ##
 If SSH keys are new to you, there are lots of good resources just a Google away ;)
 
@@ -62,10 +66,6 @@ If you can SSH into each pfSense box as the backup user without having to enter 
 
 ## The backups ##
 Backups are created from the description and host name (from the config file) followed by a timestamp.
-
-## Scheduled backups ##
-Add the following to the crontab for your backup user to run the script regularly.
-0 6,12 * * * pfmb | logger -t pfsense_backup
 
 Enjoy :)
 
