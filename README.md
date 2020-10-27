@@ -34,14 +34,7 @@ If SSH keys are new to you, there are lots of good resources just a Google away 
 
 ##### Nonetheless, here is the quick version:
 - Run ssh-keygen from the command line on the [Mac / Linux] computer doing the backups.
-- Copy the content from id_rsa.pub and paste it into the "Authorized keys" field in pfSense (see below.)
-
-##### Setup your ~/.ssh/config file to pass the correct identity for your backup user:
-```
-Host *
-    User backup
-    IdentityFile ~/.ssh/backup-user.rsa
-```
+- Copy the content from .ssh/id_rsa.pub and paste it into the "Authorized keys" field in pfSense (see below.)
 
 ## SSH Setup on the pfSense box ##
 
