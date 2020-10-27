@@ -1,1 +1,0 @@
-0 6,12 * * * /usr/local/bin/pfmb | logger -t pfsense_backup

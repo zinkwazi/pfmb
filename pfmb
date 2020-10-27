@@ -12,9 +12,9 @@ if [[ -r "/etc/default/pfmb" ]] ; then
 fi
 
 ##### Defaults when there are no defaults
-: ${config:=/etc/pfmb/hosts.conf}
+: ${config:=hosts.conf}
 : ${backupuser:=backup}
-: ${backupdir:=/var/backups/pfmb}
+: ${backupdir:=backups}
 : ${backupcopies:=25}
 
 ##### Other settings - don't change these willy-nilly unless you know what you're doing! #####
