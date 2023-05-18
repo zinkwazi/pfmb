@@ -4,14 +4,12 @@
 # To Do List:
 # Encrypt the stored backups.
 # Accept single hostname or IP from the command line and bypass hosts file.
-# Give better feedback on errors relating to SSH / connectivity.
-# Allow different SSH keys for each IP.
 
 if [[ -r "/etc/default/pfmb" ]] ; then
   source /etc/default/pfmb
 fi
 
-##### Defaults
+##### Configuration settings - See README for details
 : ${config:=hosts.conf}
 : ${backupuser:=backup}
 : ${backupdir:=backups}
