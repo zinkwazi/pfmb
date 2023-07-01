@@ -1,9 +1,6 @@
 #!/bin/bash
 # by Greg Lawler greg@outsideopen.com
 #
-# To Do List:
-# Encrypt the stored backups.
-# Accept single hostname or IP from the command line and bypass hosts file.
 
 if [[ -r "/etc/default/pfmb" ]] ; then
   source /etc/default/pfmb
