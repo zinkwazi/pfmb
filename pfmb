@@ -14,6 +14,8 @@ fi
 
 ##### Other settings - don't change these willy-nilly unless you know what you're doing! #####
 datestamp=$(date '+%Y-%m-%d-%s')
+counterOK=0
+counterERROR=0
 
 # Path on pfSense to the XML configuration file.
 : ${xmlpath:=/cf/conf/config.xml}
@@ -78,3 +80,7 @@ function main() {
   done < $config
 }
 main
+echo ""
+echo "All done"
+echo "Successful backups: $counterOK"
+echo "Unsuccessful backups: $counterERROR"
