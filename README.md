@@ -2,8 +2,10 @@
 by Greg Lawler
 
 ## About pfmb
+Back up all your pfSense firewalls daily!
+
 pfmb will connect to one or many remote pfSense installs and backup the configuration XML file.
-The resulting backup will enable you to easily go back to a previous configuration or replace failed hardware.
+The resulting backup will enable you to easily rool back to a previous configuration or recover from failed hardware.
 pfmb will keep the number of backups that you specify in config, rotating out the old ones.
 
 The script works over SSH with SSH public keys for secure authentication and transport.
@@ -19,7 +21,7 @@ Format of the hosts.conf entries `<username>@<hostname>:<port>`
 10.10.1.1:80
 pfsense.example.com
 207.123.123.4
-10.20.1.1:
+10.20.1.1
 user@pfsense2.example.com
 ```
 
@@ -30,8 +32,7 @@ Add the following to the crontab for your backup user to perform daily pfSense b
 
 ## SSH setup on your side ##
 If SSH keys are new to you, there are lots of good resources just a Google away ;)
-
-##### Nonetheless, here is the quick version:
+Here is a quick start version:
 - Run ssh-keygen from the command line on the [Mac / Linux] computer doing the backups.
 - Copy the content from .ssh/id_rsa.pub and paste it into the "Authorized SSH keys" field in pfSense (see below.)
 
